@@ -1,0 +1,15 @@
+n8n.sidneyferracinjr.com {
+	tls info@sidneyferracinjr.com
+
+	reverse_proxy n8n:5678 {
+		transport http {
+			versions h2c 1.1
+		}
+		flush_interval -1
+
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}
